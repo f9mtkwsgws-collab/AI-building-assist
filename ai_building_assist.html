@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Building Assist</title>
+<style>
+:root{color-scheme:light dark;--bg:#111315;--surface:#1b1e21;--surface2:#24282c;--text:#f5f5f2;--muted:#aeb4b8;--accent:#f2b233;--border:#34393e;--green:#79c98a}*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#0b0d0e;color:var(--text)}button,input,textarea{font:inherit}.app{min-height:100vh;background:var(--bg);max-width:520px;margin:auto}.top{padding:28px 20px 16px;display:flex;justify-content:space-between;align-items:center}.logo{font-weight:800;letter-spacing:-.5px}.logo span{color:var(--accent)}.avatar{width:38px;height:38px;border-radius:50%;background:var(--accent);color:#111;display:grid;place-items:center;font-weight:800}.content{padding:0 18px 100px}.hello{font-size:28px;font-weight:800;margin:12px 0 4px}.sub{color:var(--muted);margin-bottom:20px}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:15px}.stat b{display:block;font-size:23px}.stat small{color:var(--muted)}.hero{margin:18px 0;background:var(--accent);color:#111;border-radius:20px;padding:20px}.hero h2{margin:0 0 7px;font-size:21px}.hero p{margin:0 0 16px;opacity:.8}.primary{border:0;border-radius:12px;padding:14px 18px;font-weight:800;background:#111;color:#fff;cursor:pointer;width:100%}.section-title{display:flex;justify-content:space-between;align-items:center;margin:24px 2px 10px}.section-title h3{margin:0}.section-title span{color:var(--muted);font-size:13px}.cards{display:grid;gap:10px}.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px;display:flex;gap:13px;align-items:center;cursor:pointer}.icon{font-size:25px;width:42px;height:42px;border-radius:12px;background:var(--surface2);display:grid;place-items:center}.card b{display:block}.card small{color:var(--muted)}.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(520px,100%);background:#151719eF;backdrop-filter:blur(12px);border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr);padding:8px 8px calc(8px + env(safe-area-inset-bottom))}.nav{background:none;border:0;color:var(--muted);font-size:11px;padding:7px;cursor:pointer}.nav strong{display:block;font-size:18px;margin-bottom:2px}.nav.active{color:var(--accent)}.screen{display:none}.screen.active{display:block}.back{background:none;border:0;color:var(--muted);padding:5px 0 15px;cursor:pointer}.quote-box{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:18px}.mic{width:120px;height:120px;border-radius:50%;border:10px solid #3b331f;background:var(--accent);color:#111;display:grid;place-items:center;font-size:46px;margin:22px auto;cursor:pointer}.hint{text-align:center;color:var(--muted);line-height:1.5}.recording{color:#ffb4a9;text-align:center;font-weight:700;display:none}.field{margin-top:16px}.field label{display:block;color:var(--muted);font-size:13px;margin-bottom:7px}.field input,.field textarea{width:100%;background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:12px}.draft{display:none}.line{display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding:11px 0}.line:last-child{border:0}.total{font-size:23px;font-weight:800}.pill{display:inline-block;padding:5px 9px;border-radius:99px;background:#2a302b;color:var(--green);font-size:12px;font-weight:700}.toast{position:fixed;top:18px;left:50%;transform:translateX(-50%) translateY(-80px);background:#fff;color:#111;padding:11px 15px;border-radius:12px;font-weight:700;transition:.25s;z-index:9}.toast.show{transform:translateX(-50%) translateY(0)}
+@media(prefers-color-scheme:light){:root{--bg:#f5f5f2;--surface:#fff;--surface2:#f0f1ef;--text:#17191b;--muted:#697076;--border:#dfe2df}.bottom{background:#ffffffed}.primary{background:#17191b;color:#fff}}
+</style></head>
+<body><div class="app">
+<header class="top"><div class="logo">AI <span>BUILDING</span> ASSIST</div><div class="avatar">G</div></header>
+<main class="content">
+<section id="home" class="screen active"><div class="hello">Good morning, George 👋</div><div class="sub">Your building admin, without the paperwork.</div>
+<div class="stats"><div class="stat"><b>£18,450</b><small>Quotes outstanding</small></div><div class="stat"><b>3</b><small>Need following up</small></div><div class="stat"><b>2</b><small>New enquiries</small></div><div class="stat"><b>7</b><small>Upcoming jobs</small></div></div>
+<div class="hero"><h2>🎙️ Got a new job?</h2><p>Tell AI what needs doing and we'll build a draft quote for you.</p><button class="primary" onclick="show('quote')">CREATE A QUOTE →</button></div>
+<div class="section-title"><h3>Today's priorities</h3><span>AI Assistant</span></div><div class="cards"><div class="card" onclick="toast('Follow-up drafted for John Smith')"><div class="icon">🔔</div><div><b>Follow up John Smith</b><small>Rear extension quote · 5 days ago</small></div></div><div class="card" onclick="toast('Job opened')"><div class="icon">📅</div><div><b>Tomorrow · 8:00am</b><small>Oak garage · Aylesbury</small></div></div></div></section>
+<section id="quote" class="screen"><button class="back" onclick="show('home')">← Back</button><h1>New Quote</h1><div class="quote-box"><h2 style="text-align:center">🎙️ Tell me about the job</h2><div class="mic" id="mic" onclick="record()">🎙️</div><button class="primary" style="margin-top:8px;background:var(--surface2);color:var(--text);border:1px solid var(--border)" onclick="demoVoice()">▶️ TRY DEMO VOICE NOTE</button><div id="recording" class="recording">● Listening… speak now, then tap the microphone again</div><p id="hint" class="hint"><b>Best way to test now:</b> tap “TRY DEMO VOICE NOTE”. If your browser allows microphone access, you can use the 🎙️ button too.<br><br>Try: “John Smith, Aylesbury. Rear extension roof, 45 square metres. Two carpenters for four days. Hand-cut roof, insulation, OSB, membrane, battens and tiles.”</p><div id="transcriptBox" class="field" style="display:none"><label>WHAT I HEARD</label><textarea id="transcript" rows="4" readonly></textarea></div><div id="draft" class="draft"><div class="pill">AI DRAFT READY</div><div class="field"><label>CUSTOMER</label><input id="customer" value=""></div><div class="field"><label>PROJECT</label><input id="project" value=""></div><div class="field"><label>DESCRIPTION</label><textarea id="description" rows="4"></textarea></div><div class="field"><label>LABOUR</label><input id="labour" value=""></div><div class="field"><label>MEASUREMENTS</label><input id="measurements" value=""></div><div class="section-title"><h3>Draft estimate</h3><span>Editable</span></div><div class="line"><span>Carpenter labour</span><b id="labourCost">£0</b></div><div class="line"><span>Materials allowance</span><b id="materialsCost">£0</b></div><div class="line"><span>Subtotal</span><b id="subtotal">£0</b></div><div class="line"><span class="total">Draft total</span><span class="total" id="total">£0</span></div><p class="hint" style="margin-top:14px;font-size:12px">Prototype only: prices are demo estimates and should be checked before sending to a customer.</p><button class="primary" style="margin-top:16px" onclick="toast('Draft saved — ready for review')">REVIEW & SAVE QUOTE</button></div></div></section>
+<section id="quotes" class="screen"><button class="back" onclick="show('home')">← Back</button><h1>Quotes</h1><div class="cards"><div class="card"><div class="icon">💷</div><div><b>John Smith · £5,850</b><small>Rear extension roof · Awaiting response</small></div></div><div class="card"><div class="icon">🔔</div><div><b>Sarah Jones · £12,600</b><small>Follow-up due today</small></div></div></div></section>
+<section id="jobs" class="screen"><button class="back" onclick="show('home')">← Back</button><h1>Jobs</h1><div class="cards"><div class="card"><div class="icon">📅</div><div><b>Oak garage</b><small>Tomorrow · Aylesbury · 8:00am</small></div></div><div class="card"><div class="icon">🏠</div><div><b>Rear extension</b><small>12 Oct · Buckingham</small></div></div></div></section>
+</main><nav class="bottom"><button class="nav active" onclick="show('home')"><strong>⌂</strong>Home</button><button class="nav" onclick="show('quote')"><strong>＋</strong>New quote</button><button class="nav" onclick="show('quotes')"><strong>£</strong>Quotes</button><button class="nav" onclick="show('jobs')"><strong>▣</strong>Jobs</button></nav><div id="toast" class="toast"></div></div>
+<script>
+function show(id){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0)}
+let listening=false, recognition=null, finalTranscript='';
+const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+function record(){
+  if(!SpeechRecognition){toast('This preview cannot access speech recognition here. Use TRY DEMO VOICE NOTE below.');return;}
+  if(listening){recognition.stop();return;}
+  finalTranscript='';
+  recognition=new SpeechRecognition();
+  recognition.lang='en-GB'; recognition.continuous=true; recognition.interimResults=true;
+  recognition.onstart=()=>{listening=true;document.getElementById('mic').textContent='⏹️';document.getElementById('recording').style.display='block';document.getElementById('hint').style.display='none';document.getElementById('transcriptBox').style.display='block';document.getElementById('transcript').value='';};
+  recognition.onresult=(event)=>{let interim='';for(let i=event.resultIndex;i<event.results.length;i++){let txt=event.results[i][0].transcript;if(event.results[i].isFinal) finalTranscript+=' '+txt;else interim+=' '+txt;}document.getElementById('transcript').value=(finalTranscript+' '+interim).trim();};
+  recognition.onerror=(e)=>{if(e.error==='not-allowed') toast('Microphone permission was blocked. Allow microphone access and try again.'); else toast('Voice recognition error: '+e.error);};
+  recognition.onend=()=>{if(listening){listening=false;finishRecording();}};
+  recognition.start();
+}
+function demoVoice(){
+  const demo='John Smith in Aylesbury. Rear extension roof, 45 square metres. Two carpenters for four days. Hand-cut roof with 150mm insulation, OSB, breathable membrane, battens and concrete tiles. Fascia and soffit included.';
+  document.getElementById('transcriptBox').style.display='block';
+  document.getElementById('hint').style.display='none';
+  document.getElementById('transcript').value=demo;
+  buildDraft(demo);
+  toast('Demo voice note processed');
+}
+function finishRecording(){
+  listening=false;document.getElementById('mic').textContent='🎙️';document.getElementById('recording').style.display='none';
+  const text=(finalTranscript||document.getElementById('transcript').value).trim();
+  if(!text){toast('I did not catch the job description. Try again.');return;}
+  buildDraft(text);toast('Draft quote created');
+}
+function money(n){return new Intl.NumberFormat('en-GB',{style:'currency',currency:'GBP',maximumFractionDigits:0}).format(n)}
+function buildDraft(text){
+  const lower=text.toLowerCase();
+  const names=text.match(/(?:for|customer|client)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+){1,2})/i);
+  const customer=names?names[1]:((text.match(/\b(?:mr|mrs|ms)\.?\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?/i)||[])[0]||'Customer to confirm');
+  let project='Building work';
+  const projectRules=[['rear extension roof','Rear extension roof'],['extension roof','Extension roof'],['oak garage','Oak garage'],['garden room','Garden room'],['kitchen','Kitchen fit-out'],['roof','Roofing / carpentry'],['loft conversion','Loft conversion'],['extension','Extension']];
+  for(const r of projectRules){if(lower.includes(r[0])){project=r[1];break;}}
+  const areaMatch=lower.match(/(\d+(?:\.\d+)?)\s*(?:square metres|sq ?m|m2|m²)/i);
+  const area=areaMatch?parseFloat(areaMatch[1]):null;
+  const workersMatch=lower.match(/(\d+)\s*(?:carpenters?|men|workers?)/i); const workers=workersMatch?parseInt(workersMatch[1]):1;
+  const daysMatch=lower.match(/(?:for|about|around)\s*(\d+)\s*days?|(?:over|takes)\s*(\d+)\s*days?/i); const days=daysMatch?parseInt(daysMatch[1]||daysMatch[2]):1;
+  const materials=[]; ['insulation','osb','membrane','battens','tiles','fascia','soffit','plasterboard','timber','kitchen'].forEach(x=>{if(lower.includes(x))materials.push(x);});
+  const labourCost=workers*days*400;
+  const materialsCost=area?Math.round(area*95):Math.round(labourCost*1.25);
+  const total=labourCost+materialsCost;
+  document.getElementById('customer').value=customer;
+  document.getElementById('project').value=project;
+  document.getElementById('description').value=buildDescription(project,materials,text);
+  document.getElementById('labour').value=workers+' carpenter'+(workers===1?'':'s')+' · '+days+' day'+(days===1?'':'s');
+  document.getElementById('measurements').value=area?area+' m²':'Not stated — confirm on site';
+  document.getElementById('labourCost').textContent=money(labourCost);
+  document.getElementById('materialsCost').textContent=money(materialsCost);
+  document.getElementById('subtotal').textContent=money(total);
+  document.getElementById('total').textContent=money(total);
+  document.getElementById('draft').style.display='block';
+}
+function buildDescription(project,materials,text){let d=project+'.';if(materials.length)d+=' Includes '+materials.join(', ')+'.';return d+' Original voice note: '+text;}
+function toast(msg){let t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600)}
+</script>
+</body></html>
